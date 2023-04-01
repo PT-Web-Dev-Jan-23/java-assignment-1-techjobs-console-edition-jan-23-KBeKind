@@ -93,14 +93,37 @@ public class JobData {
      * @param value The search term to look for
      * @return      List of all jobs with at least one field containing the value
      */
+
+
+
+
     public static ArrayList<HashMap<String, String>> findByValue(String value) {
 
         // load data, if not already loaded
         loadData();
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
+        for(HashMap entry : allJobs){
+
+            for(Object aValue : entry.values()) {
+                String aValueString = aValue.toString();
+                if(aValueString.contains(value)) {
+                        jobs.add(entry);
+                        break;
+                    }
+
+            }
+
+        }
 
         // TODO - implement this method
-        return null;
+        return jobs;
     }
+
+
+
+
+
 
     /**
      * Read in data from a CSV file and store it in a list
